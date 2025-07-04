@@ -1,0 +1,17 @@
+.quiz-input {
+    width: 20px;
+    cursor: pointer;
+}
+
+.btn {
+  background-color: #01008a;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: #fff;
+}
+
+.question {
+  color: #01008a;
+}

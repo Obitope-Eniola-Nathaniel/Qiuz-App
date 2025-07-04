@@ -1,0 +1,26 @@
+.custom-input {
+  padding: 1rem 1.25rem;
+  border: 2px solid #01008a;      /* teal‑500 */
+  border-radius: 0.5rem;
+}
+
+.custom-btn {
+  background: linear-gradient(90deg,#4f46e5,#7c3aed);
+  color:#01008a;
+  font-weight:600;
+}
+
+.quiz-start {
+    color: #01008a;
+}
+
+.btn {
+    background-color: #01008a;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: #01008a;
+    border: 2px solid #01008a;
+}
