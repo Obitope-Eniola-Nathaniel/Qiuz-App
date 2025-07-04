@@ -150,7 +150,7 @@ node_modules/
 ## 🧑‍💻 Author
 
 **Your Name**
-GitHub: [https://github.com/your-username](https://github.com/your-username)
+GitHub: [https://github.com/Obitope-Eniola-Nathaniel](https://github.com/Obitope-Eniola-Nathaniel)
 
 ---
 
