@@ -33,6 +33,10 @@ const ResultPage = ({ result }) => {
       <img src={image} alt="result-status" className="enforca mx-auto" />
 
       <p className="text-gray-700">{result.recommendation}</p>
+
+      <p className="text-red-500 mt-4">
+        Your performance is under review, click <a className="text-blue-500 hover:underline" href={result.link}>NEXT STEP</a> to proceed.
+      </p>
     </div>
   );
 };
