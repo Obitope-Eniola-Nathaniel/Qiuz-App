@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import "./StartForm.css";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-// import animationData from "../assets/quiz-animation.json";
 
 const StartForm = ({ onStart }) => {
   const [name, setName] = useState("");
@@ -11,9 +10,11 @@ const StartForm = ({ onStart }) => {
   const [category, setCategory] = useState("frontend");
 
   const handleStart = async () => {
-    if (!name.trim() || !email.trim()) {
+    if (!name.trim() || !email.trim() || !phone.trim() || !category.trim()) {
       // Check if username is empty or just whitespace
-      alert("Input name and email");
+      // alert("Input name and email");
+      toast.error("Please fill all fields!");
+
       return;
     }
     try {
@@ -24,69 +25,65 @@ const StartForm = ({ onStart }) => {
         category,
       });
       onStart(res.data); // Pass userId and questions to parent
+      toast.success("Quiz started!");
     } catch (err) {
-      alert("Start failed: " + err.message);
+      toast.error("Start failed: " + err.message);
     }
   };
   return (
-    <div className="max-w-2xl mx-auto mt-5 p-8 bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center px-4 py-10">
-      {/* <div className="md:w-1/2 mb-6 md:mb-0">
-        <Lottie animationData={animationData} className="w-full max-w-md mx-auto" />
-      </div> */}
-      
-
-      <div className="md:w-1/2 rounded-2xl p-2 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-blue-900 mb-4 text-center">Quiz Time </h1>
-        <p className="text-1xl text-gray-600 mb-6">
-          📌 Please enter your correct details to begin. <br />
-          ⏱ You have <strong className="text-red-600">10 seconds</strong> to answer each question. <br />
-          🧠 Choose the category you belong to. <br />
-          {/* Do not retake the quiz once submitted. */}
+    <div className="max-w-3xl mx-auto mt-10 px-6 py-10 bg-white shadow-2xl rounded-3xl flex flex-col md:flex-row items-center gap-8 transition-all duration-500">
+      {/* Left Section (Instructions) */}
+      <div className="md:w-1/2 space-y-4">
+        <h1 className="text-3xl font-bold text-blue-800 animate-bounce text-center">🚀 Quiz Time</h1>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          📌 Please enter your correct details to begin. <br />⏱ You have{" "}
+          <span className="text-red-600 font-semibold">10 seconds</span> to
+          answer each question. <br />
+          🧠 Choose the category you belong to and stay focused! <br />
         </p>
-     
-
       </div>
-      {/* <h2 className="text-3xl font-bold text-center mb-6 quiz-start">
-        Start Quiz
-      </h2> */}
-      <section className="space-y-4">
+
+      {/* Right Section (Form) */}
+      <section className="md:w-1/2 space-y-4 w-full">
         <input
-          placeholder="Name"
+          placeholder="Full Name"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="custom-input w-full px-4 py-3 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-        <br />
+
         <input
-          placeholder="Email"
+          type="email"
+          placeholder="Email Address"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="custom-input w-full px-4 py-3 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-        <br />
-         <input
-          placeholder="Phone No"
+
+        <input
+          type="tel"
+          placeholder="Phone Number"
           required
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="custom-input w-full px-4 py-3 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
-        <br />
+
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full px-4 py-3 border rounded bg-white focus:outline-none focus:ring focus:ring-blue-300 custom-input"
+          className="w-full px-4 py-3 border rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         >
           <option value="frontend">Frontend</option>
           <option value="backend">Backend</option>
           <option value="pm">Product Management</option>
         </select>
-        <br />
+
         <button
           onClick={handleStart}
-          className="w-full py-3 font-semibold rounded transition btn"
+          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition duration-300"
         >
           Start Quiz
         </button>

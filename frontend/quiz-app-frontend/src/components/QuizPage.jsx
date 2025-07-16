@@ -42,40 +42,51 @@ const QuizPage = ({ userId, questions, onSubmit }) => {
   const q = questions[current];
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
-      <h3 className="text-lg font-bold mb-4 question">
-        Question {current + 1} of {questions.length}
-      </h3>
+    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl transition-all duration-300 ease-in-out">
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-gray-800 mb-1">
+          🧠 Question {current + 1} of {questions.length}
+        </h3>
+        <p className="text-lg text-gray-500">
+          Time Remaining:{" "}
+          <span className="text-red-600 font-semibold">{timer}s</span>
+        </p>
+      </div>
 
-      <p className="text-xl font-semibold mb-4 question">{q.questionText}</p>
-      <div className="space-y-2 mb-4">
+      <p className="text-2xl font-semibold text-gray-900 mb-6">
+        {q.questionText}
+      </p>
+
+      <div className="space-y-3 mb-6">
         {q.options.map((opt, i) => (
-          <div key={i}>
-            <label className="quiz-input question">
-              <input
-                
-                type="radio"
-                name="answer"
-                value={opt}
-                checked={selected === opt}
-                onChange={() => setSelected(opt)}
-              />
-              {opt}
-            </label>
-          </div>
+          <label
+            key={i}
+            className={`flex items-center border px-4 py-3 rounded-xl cursor-pointer transition ${
+              selected === opt
+                ? "bg-blue-100 border-blue-400 text-blue-900 shadow-inner"
+                : "bg-gray-50 border-gray-300 hover:bg-gray-100"
+            }`}
+          >
+            <input
+              type="radio"
+              name="answer"
+              value={opt}
+              checked={selected === opt}
+              onChange={() => setSelected(opt)}
+              className="mr-3 accent-blue-500"
+            />
+            {opt}
+          </label>
         ))}
       </div>
 
-      <div className="flex justify-between items-center mt-6">
-        <span className="text-red-600 font-semibold">
-          <p>Time Left: {timer}s</p>
-        </span>
+      <div className="flex justify-end">
         <button
           onClick={handleNext}
           disabled={!selected}
-          className={`btn px-6 py-2 rounded font-medium transition ${
+          className={`px-6 py-2 rounded-lg text-white font-semibold shadow-md transition ${
             selected
-              ? ""
+              ? "bg-blue-600 hover:bg-blue-700"
               : "bg-gray-400 cursor-not-allowed"
           }`}
         >

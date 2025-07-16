@@ -4,7 +4,9 @@ import QuizPage from "./components/QuizPage";
 import ResultPage from "./components/ResultPage";
 import axios from "axios";
 import "./App.css";
-import image from "./images/enforca.png"
+import image from "./images/enforca.png";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function App() {
   const [stage, setStage] = useState("start");
@@ -28,16 +30,16 @@ function App() {
       setResult(res.data);
       setStage("result");
     } catch (err) {
-      alert("submission Failed");
+      toast.error("Submission failed: " + err.message);
     }
   };
   return (
     <div className="app min-h-screen items-center justify-center p-4">
-      <img src={image} alt="enforca" className="enforca mx-auto"/>
+      <img src={image} alt="enforca" className="enforca mx-auto" />
+      <Toaster position="top-center" reverseOrder={false} />
 
       {/* Get the user details and retuern questions */}
       {stage === "start" && <StartForm onStart={handleStart} />}
-
 
       {stage === "quiz" && (
         <QuizPage
